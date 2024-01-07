@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: true
+        format_sql: true
+  mail:
+
+    host: 127.0.0.1
+    port: 3025
+    username: user
+    password: admin
+    protocol: smtp
+    test-connection: true
+
+paypal:
+  client-id: ATKng-nPVFq1vjGY777YnLisdTuW209IRzCV-4iEDSLotBsu9_f8wjZKFxhl0BUHNnPc85hl0_nEwhD7
+  client-secret: EDjjkDrjGJLhfSmQhhUa0hHfGpoIvUjQmzuQVbQhrkZk_e1zLeATnmlBOsD7VbEckuO8EEkQLDjfsIzt
+  mode: sandbox

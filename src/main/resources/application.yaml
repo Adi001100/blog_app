@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+spring:
+  datasource:
+    #url: jdbc:mysql://blogdb/blog?createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/blog?createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: blogmasterssend@gmail.com
+    password: zkdhvfwqykfddhwt
+    default-encoding: UTF-8
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
+#    verify:
+#      host: http://localhost:8080
+
+logging:
+  level:
+    com.progmasters: debug
+    org.springframework.web: info
+    org.hibernate: error
+  pattern:
+    console: "%cyan(%d{yyyy-MM-dd HH:mm:ss}) [%green(%thread)] %highlight(%-5level) %yellow(%logger{36}) - %msg%n"
+
+paypal:
+  client-id: AScae5d49ENeqp8O1TWkDSZHzhpRzCM4NVsVxSCM0AzshMIz0yJs06kxUbrFp8KkF0VWH1rb1lf_ycXN
+  client-secret: EBMvwhjA3ZjWLV-0P_RtVSD_3p7v2pyy_KliDyXYNbG_xjA927vqkxXJpYU7hSRz-oUqglKWCpfGthMS
+  mode: sandbox
+
