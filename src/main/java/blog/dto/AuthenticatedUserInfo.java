@@ -1,15 +1,19 @@
 package blog.dto;
 
 import blog.config.UserRole;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
+@Getter
 public class AuthenticatedUserInfo {
 
-    private String username;
-    private List<UserRole> roles;
+    private final String username;
+    private final List<UserRole> roles;
 
     public AuthenticatedUserInfo(UserDetails userDetails) {
         this.username = userDetails.getUsername();
@@ -21,13 +25,5 @@ public class AuthenticatedUserInfo {
                 .stream()
                 .map(authority -> UserRole.valueOf(authority.getAuthority()))
                 .collect(Collectors.toList());
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public List<UserRole> getRoles() {
-        return roles;
     }
 }

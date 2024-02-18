@@ -80,7 +80,7 @@ class CommentControllerTest {
         CommentFormDataUpdate commentFormDataUpdate = new CommentFormDataUpdate();
         CommentDetails commentDetails = new CommentDetails(comment);
         when(commentService.editComment(commentId, commentFormDataUpdate)).thenReturn(commentDetails);
-        ResponseEntity<CommentDetails> response = commentController.editCommnet(commentId, commentFormDataUpdate);
+        ResponseEntity<CommentDetails> response = commentController.editComment(commentId, commentFormDataUpdate);
         verify(commentService, times(1)).editComment(commentId, commentFormDataUpdate);
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
     }

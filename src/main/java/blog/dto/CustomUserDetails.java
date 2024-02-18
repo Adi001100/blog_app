@@ -1,23 +1,16 @@
 package blog.dto;
 
 import blog.domain.CustomUser;
+import lombok.Getter;
 
+@Getter
 public class CustomUserDetails {
 
-    private String username;
-
-    private String fullName;
+    private final String username;
+    private final String fullName;
 
     public CustomUserDetails(CustomUser customUser) {
         this.username = customUser.getUsername();
         this.fullName = customUser.getFullName();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getFullName() {
-        return fullName;
     }
 }

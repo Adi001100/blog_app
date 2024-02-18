@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class CategoryService {
 
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
     public CategoryService(CategoryRepository categoryRepository) {
@@ -28,7 +28,7 @@ public class CategoryService {
     }
 
     public CategoryDetails saveCategory(CategoryFormData categoryFormData) {
-        if (!checkCategoryName(categoryFormData)) {
+        if (Boolean.FALSE.equals(checkCategoryName(categoryFormData))) {
             Category categoryToCreate = new Category(categoryFormData);
             Category categoryCreated = categoryRepository.save(categoryToCreate);
             categoryCreated.setCreatedAt(LocalDateTime.now());
@@ -59,7 +59,7 @@ public class CategoryService {
     public CategoryDetails getCategoryDetailsById(Long id) {
         Category category = categoryRepository.findById(id).orElse(null);
         if (category != null) {
-            return new CategoryDetails(categoryRepository.getOne(id));
+            return new CategoryDetails(categoryRepository.getById(id));
         } else {
             throw new CategoryNotFoundByIdException(id);
         }

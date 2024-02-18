@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @Transactional
 @WithMockUser(username = "Test", authorities = {"ROLE_ADMIN"})
-public class CategoryControllerIt {
+class CategoryControllerItTest {
 
     @Autowired
     private MockMvc mockMvc;

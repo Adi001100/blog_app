@@ -199,7 +199,7 @@ class CommentServiceTest {
     @Test
     void test_getCommentDetailsByIdSuccess() {
         when(commentRepository.findById(1L)).thenReturn(Optional.ofNullable(comment));
-        when(commentRepository.getOne(1L)).thenReturn(comment);
+        when(commentRepository.getById(1L)).thenReturn(comment);
         comment.setCreatedAt(LocalDateTime.now());
         Assertions.assertEquals(comment.getAuthor(), commentService.getCommentDetailsById(1L).getAuthor());
     }

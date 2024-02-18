@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
 @Transactional
 public class CommentService {
 
-    private CommentRepository commentRepository;
-    private PostService postService;
-    private EmailService emailService;
-    private CloudinaryService cloudinaryService;
+    private final CommentRepository commentRepository;
+    private final PostService postService;
+    private final EmailService emailService;
+    private final CloudinaryService cloudinaryService;
 
     @Autowired
     public CommentService(CommentRepository commentRepository, PostService postService, EmailService emailService, CloudinaryService cloudinaryService, CloudinaryService cloudinaryService1) {
@@ -70,7 +70,7 @@ public class CommentService {
         CommentDetails details = null;
         Comment comment = commentRepository.findById(id).orElse(null);
         if (comment != null) {
-            details = new CommentDetails(commentRepository.getOne(id));
+            details = new CommentDetails(commentRepository.getById(id));
         } else {
             throw new CommentNotFoundByIdException(id);
         }

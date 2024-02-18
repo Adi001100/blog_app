@@ -13,21 +13,29 @@ import java.util.Map;
 @Service
 public class CloudinaryService {
 
-    private Dotenv dotenv = Dotenv.load();
+    private final Dotenv dotenv = Dotenv.load();
 
-    private Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
+    private final Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
+
+    private static final String USE_FILENAME = "use_filename";
+
+    private static final String UNIQUE_FILENAME = "unique_filename";
+
+    private static final String OVERWRITE = "overwrite";
+
+    private static final String SECURE_URL = "secure_url";
 
     public String uploadPhoto(String imgUrl) {
         String photoUrl;
         cloudinary.config.secure = true;
         Map params1 = ObjectUtils.asMap(
-                "use_filename", true,
-                "unique_filename", false,
-                "overwrite", true
+                USE_FILENAME, true,
+                UNIQUE_FILENAME, false,
+                OVERWRITE, true
         );
         try {
             Map map = cloudinary.uploader().upload(new File(imgUrl), params1);
-            photoUrl = map.get("secure_url").toString();
+            photoUrl = map.get(SECURE_URL).toString();
         } catch (Exception e) {
             throw new PhotoUploadFailedException();
         }
@@ -39,14 +47,14 @@ public class CloudinaryService {
         cloudinary.config.secure = true;
         Map params1 = ObjectUtils.asMap(
                 "resource_type", "video",
-                "use_filename", true,
-                "unique_filename", false,
-                "overwrite", true
+                USE_FILENAME, true,
+                UNIQUE_FILENAME, false,
+                OVERWRITE, true
         );
         try {
             Map map = cloudinary.uploader().upload(new File(videoUrl),
                     params1);
-            videoUrlFromCloud = map.get("secure_url").toString();
+            videoUrlFromCloud = map.get(SECURE_URL).toString();
         } catch (Exception e) {
             throw new VideoUploadFailedException();
         }
@@ -57,15 +65,15 @@ public class CloudinaryService {
         String photoUrl;
         cloudinary.config.secure = true;
         Map params1 = ObjectUtils.asMap(
-                "use_filename", true,
-                "unique_filename", false,
-                "overwrite", true
+                USE_FILENAME, true,
+                UNIQUE_FILENAME, false,
+                OVERWRITE, true
         );
         String[] imgDataArray = imgData.split("=", 2);
         String[] imgUrlArray = imgDataArray[1].split(",");
         try {
             Map map = cloudinary.uploader().upload(imgUrlArray[0], params1);
-            photoUrl = map.get("secure_url").toString();
+            photoUrl = map.get(SECURE_URL).toString();
         } catch (Exception e) {
             throw new PhotoUploadFailedException();
         }

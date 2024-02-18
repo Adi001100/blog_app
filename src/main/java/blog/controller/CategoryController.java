@@ -24,7 +24,7 @@ import java.util.List;
 
 @Tag(
         name = "CRUD REST APIs for Category in BLOGMASTER",
-        description = "CRUD REST APIs in BLOGMASTER to CREATE and FETCH category details"
+        description = "to CREATE and FETCH category(s)"
 )
 @RestController
 @RequestMapping("/api/categories")
@@ -50,7 +50,8 @@ public class CategoryController {
     )
     @ApiResponse(
             responseCode = "400",
-            description = "HTTP Status Bad Request",
+            description = "HTTP Status Bad Request \n " +
+                    "Category already exist",
             content = @Content(
                     schema = @Schema(implementation = CategoryAlreadyExistException.class)
             )
@@ -85,7 +86,8 @@ public class CategoryController {
             description = "Category has been found.")
     @ApiResponse(
             responseCode = "400",
-            description = "HTTP Status Bad Request",
+            description = "HTTP Status Bad Request \n" +
+                    "CategoryNotFoundById",
             content = @Content(
                     schema = @Schema(implementation = CategoryNotFoundByIdException.class)
             )

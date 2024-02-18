@@ -1,22 +1,15 @@
 package blog.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class CommentFormDataUpdate {
 
     private Long postId;
-
     private String author;
-
     private String commentBody;
-
-    public Long getPostId() {
-        return postId;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getCommentBody() {
-        return commentBody;
-    }
 }

@@ -88,7 +88,7 @@ class CategoryServiceTest {
     @Test
     void test_getCategoryDetailsByIdSuccess() {
         when(categoryRepository.findById(1L)).thenReturn(Optional.ofNullable(travel));
-        when(categoryRepository.getOne(1L)).thenReturn(travel);
+        when(categoryRepository.getById(1L)).thenReturn(travel);
         travel.setCreatedAt(LocalDateTime.now());
         org.junit.jupiter.api.Assertions.assertEquals(travel.getCategoryName(), categoryService.getCategoryDetailsById(1L).getCategoryName());
 

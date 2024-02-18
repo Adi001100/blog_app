@@ -2,20 +2,22 @@ package blog.dto;
 
 import blog.config.SpringWebConfig;
 import blog.domain.Post;
+import lombok.Getter;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Getter
 public class PostListItem {
 
-    private Long id;
-    private String title;
-    private String postBodyShortened;
-    private String imgUrl;
-    private String createdAt;
-    private Integer numberOfComments;
-    private String category;
-    private String username;
+    private final Long id;
+    private final String title;
+    private final String postBodyShortened;
+    private final String imgUrl;
+    private final String createdAt;
+    private final Integer numberOfComments;
+    private final String category;
+    private final String username;
 
     public PostListItem(Post post) {
         this.id = post.getId();
@@ -32,37 +34,5 @@ public class PostListItem {
         this.numberOfComments = post.getComments().size();
         this.category = post.getCategory().getCategoryName();
         this.username = post.getCustomUser().getUsername();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getPostBodyShortened() {
-        return postBodyShortened;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public Integer getNumberOfComments() {
-        return numberOfComments;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getUsername() {
-        return username;
     }
 }

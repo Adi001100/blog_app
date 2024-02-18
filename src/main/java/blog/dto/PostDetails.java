@@ -2,11 +2,15 @@ package blog.dto;
 
 import blog.config.SpringWebConfig;
 import blog.domain.Post;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 public class PostDetails {
 
     private Long id;
@@ -35,97 +39,9 @@ public class PostDetails {
                     .collect(Collectors.toList());
         }
         this.category = post.getCategory().getCategoryName();
-        this.isDeleted = post.getDeleted();
+        this.isDeleted = post.getIsDeleted();
         this.isPublished = post.getPublished();
         this.numberOfLike = post.getNumberOfLike();
         this.videoUrl = post.getVideoUrl();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getPostBody() {
-        return postBody;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public List<CommentDetails> getComments() {
-        return comments;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPostBody(String postBody) {
-        this.postBody = postBody;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setComments(List<CommentDetails> comments) {
-        this.comments = comments;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public Boolean getPublished() {
-        return isPublished;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
-
-    public void setPublished(Boolean published) {
-        isPublished = published;
-    }
-
-    public Integer getNumberOfLike() {
-        return numberOfLike;
-    }
-
-    public void setNumberOfLike(Integer numberOfLike) {
-        this.numberOfLike = numberOfLike;
     }
 }

@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @Transactional
 @WithMockUser(authorities = {"ROLE_ADMIN"})
-public class PostControllerIt {
+class PostControllerItTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -158,13 +158,13 @@ public class PostControllerIt {
         savePost();
         Post beforeDeletPost = entityManager.find(Post.class, 1L);
         assertNotNull(beforeDeletPost);
-        assertFalse(beforeDeletPost.getDeleted());
+        assertFalse(beforeDeletPost.getIsDeleted());
         mockMvc.perform(delete("/api/posts/delete/1")
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isAccepted());
         Post afterDeletePost = entityManager.find(Post.class, 1L);
         assertNotNull(afterDeletePost);
-        assertTrue(afterDeletePost.getDeleted());
+        assertTrue(afterDeletePost.getIsDeleted());
     }
 
     @Test
@@ -189,13 +189,13 @@ public class PostControllerIt {
         savePostTorestore();
         Post beforeDeletPost = entityManager.find(Post.class, 1L);
         assertNotNull(beforeDeletPost);
-        assertTrue(beforeDeletPost.getDeleted());
+        assertTrue(beforeDeletPost.getIsDeleted());
         mockMvc.perform(put("/api/posts/restore/1")
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
         Post afterDeletePost = entityManager.find(Post.class, 1L);
         assertNotNull(afterDeletePost);
-        assertFalse(afterDeletePost.getDeleted());
+        assertFalse(afterDeletePost.getIsDeleted());
     }
 
 

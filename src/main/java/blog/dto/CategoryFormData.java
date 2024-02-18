@@ -7,12 +7,13 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
-@Getter
 @AllArgsConstructor
+@Getter
 public class CategoryFormData {
 
     @NotBlank(message = "Must not be blank!")
     @Schema(example = "java")
+    @Setter
     private String categoryName;
 
     @Setter

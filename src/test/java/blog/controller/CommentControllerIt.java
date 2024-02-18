@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @Transactional
 @WithMockUser(authorities = {"ROLE_ADMIN"})
-public class CommentControllerIt {
+class CommentControllerItTest {
 
     @Autowired
     private MockMvc mockMvc;

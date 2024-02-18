@@ -1,14 +1,11 @@
 package blog.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public class PostNotFoundByIdException extends RuntimeException {
 
     private final Long id;
-
-    public PostNotFoundByIdException(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

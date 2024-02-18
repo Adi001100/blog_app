@@ -11,13 +11,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class AngularBlogApplicationTests {
+class BlogApplicationTests {
     @RegisterExtension
     static GreenMailExtension greenMail = new GreenMailExtension(ServerSetupTest.SMTP)
             .withConfiguration(GreenMailConfiguration.aConfig().withUser("user", "admin"))
             .withPerMethodLifecycle(false);
 
     @Test
-    public void contextLoads() {
+    void contextLoads() {
     }
 }

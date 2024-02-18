@@ -1,14 +1,11 @@
 package blog.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public class UserNotFoundByEmailException extends RuntimeException {
 
     private final String email;
-
-    public UserNotFoundByEmailException(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 }

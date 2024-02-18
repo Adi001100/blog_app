@@ -1,14 +1,11 @@
 package blog.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public class UserNotFoundByNameException extends RuntimeException {
 
-    private String userName;
-
-    public UserNotFoundByNameException(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
+    private final String userName;
 }

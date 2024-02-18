@@ -5,7 +5,7 @@ import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ class PaypalServiceTest {
 
     private PaypalService underTest;
 
-    @Before
-    void init() {
+    @BeforeEach
+    public void init() {
         apiContext = mock(APIContext.class);
         underTest = new PaypalService(apiContext);
     }
@@ -47,9 +47,5 @@ class PaypalServiceTest {
 
         verify(payment, times(1)).create(apiContext);
         verify(payment, times(1)).setTransactions(transactions);
-    }
-
-    @Test
-    void executePayment() {
     }
 }

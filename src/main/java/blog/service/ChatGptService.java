@@ -26,7 +26,7 @@ public class ChatGptService {
 
     private OpenAiService openAiService;
 
-    private CloudinaryService cloudinaryService;
+    private final CloudinaryService cloudinaryService;
 
     private final String SYSTEM_TASK_MESSAGE = "You are in an API server." +
             System.lineSeparator() +

@@ -16,6 +16,8 @@ public class EmailService {
     public static final String NEW_USER_ACCOUNT_VERIFICATION = "NEW USER ACCOUNT VERIFICATION";
     public static final String DELETED_REGISTRATION = "DELETED YOUR REGISTRATION";
 
+    public static final String DEAR = "Dear ";
+
     @Value("${spring.mail.username}")
     private String emailFrom;
 
@@ -32,7 +34,7 @@ public class EmailService {
             mailMessage.setFrom(emailFrom);
             mailMessage.setTo(email);
             mailMessage.setSubject("New comment to post");
-            mailMessage.setText("Dear " + username + "! There is a new comment to your post");
+            mailMessage.setText(DEAR + username + "! There is a new comment to your post");
             javaMailSender.send(mailMessage);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -49,7 +51,7 @@ public class EmailService {
             mailMessage.setFrom(emailFrom);
             mailMessage.setTo(email);
             mailMessage.setSubject("New like to post");
-            mailMessage.setText("Dear " + username + "! There is a new like to your post");
+            mailMessage.setText(DEAR + username + "! There is a new like to your post");
             javaMailSender.send(mailMessage);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -65,7 +67,7 @@ public class EmailService {
             mailMessage.setSubject(NEW_USER_ACCOUNT_VERIFICATION);
             mailMessage.setFrom(emailFrom);
             mailMessage.setTo(to);
-            mailMessage.setText("please verify your email address using the link below \n http://localhost:8080/api/users/" + token);
+            mailMessage.setText(DEAR + name + " please verify your email address using the link below \n http://localhost:8080/api/users/" + token);
             javaMailSender.send(mailMessage);
         } catch (Exception exception) {
             throw new RuntimeException(exception.getMessage());
@@ -79,7 +81,7 @@ public class EmailService {
             mailMessage.setSubject(DELETED_REGISTRATION);
             mailMessage.setFrom(emailFrom);
             mailMessage.setTo(to);
-            mailMessage.setText("Your registration has been deleted, because you didn't verified your registration");
+            mailMessage.setText("Dear " + name + " Your registration has been deleted, because you didn't verified your registration");
             javaMailSender.send(mailMessage);
         } catch (Exception exception) {
             throw new RuntimeException(exception.getMessage());

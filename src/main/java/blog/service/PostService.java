@@ -28,12 +28,12 @@ import java.util.stream.Collectors;
 @Transactional
 public class PostService {
 
-    private PostRepository postRepository;
-    private CategoryService categoryService;
-    private EmailService emailService;
-    private CloudinaryService cloudinaryService;
-    private CustomUserService customUserService;
-    private ChatGptService chatGptService;
+    private final PostRepository postRepository;
+    private final CategoryService categoryService;
+    private final EmailService emailService;
+    private final CloudinaryService cloudinaryService;
+    private final CustomUserService customUserService;
+    private final ChatGptService chatGptService;
 
     @Autowired
     public PostService(PostRepository postRepository, CategoryService categoryService,
@@ -86,7 +86,7 @@ public class PostService {
         PostDetails details = null;
         Post post = postRepository.findById(id).orElse(null);
         if (post != null) {
-            details = new PostDetails(postRepository.getOne(id));
+            details = new PostDetails(postRepository.getById(id));
         } else {
             throw new PostNotFoundByIdException(id);
         }
@@ -118,7 +118,7 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundByIdException(id));
         if (isAdminOrPostAuthor(post)) {
-            post.setDeleted(true);
+            post.setIsDeleted(true);
         } else {
             throw new NotTheUsersPost();
         }
@@ -128,7 +128,7 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundByIdException(id));
         if (isAdminOrPostAuthor(post)) {
-            post.setDeleted(false);
+            post.setIsDeleted(false);
             post.setCreatedAt(LocalDateTime.now());
         } else {
             throw new NotTheUsersPost();
@@ -152,7 +152,7 @@ public class PostService {
                 post.setCategory(categoryService.getCategoryById(postFormDataUpdate.getCategoryId()));
             }
 
-            if (postFormDataUpdate.getTimedPost()) {
+            if (Boolean.TRUE.equals(postFormDataUpdate.getTimedPost())) {
                 if (postFormDataUpdate.getPublishTime() != null) {
                     post.setPublishTime(postFormDataUpdate.getPublishTime());
                     post.setPublished(false);
@@ -180,7 +180,7 @@ public class PostService {
         List<Post> scheduledPosts = postRepository.findByPublishTimeBefore(now);
 
         for (Post post : scheduledPosts) {
-            if (!post.getPublished()) {
+            if (Boolean.FALSE.equals(post.getPublished())) {
                 post.setPublished(true);
             }
         }
@@ -198,8 +198,8 @@ public class PostService {
     }
 
     public PostDetails likePost(Long id) {
-        Post post = postRepository.findById(id).orElseThrow();
-        if (post != null && post.getPublished()) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundByIdException(id));
+        if (Boolean.TRUE.equals(post.getPublished())) {
             Integer like = post.getNumberOfLike();
             like++;
             post.setNumberOfLike(like);

@@ -33,9 +33,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class PostServiceTest {
-
-
+class PostServiceTest {
+    
     @Mock
     private PostRepository postRepository;
 
@@ -120,7 +119,7 @@ public class PostServiceTest {
         post.setId(postId);
         when(postRepository.findById(postId)).thenReturn(Optional.of(post));
         postService.deletePost(postId);
-        assertTrue(post.getDeleted());
+        assertTrue(post.getIsDeleted());
     }
 
     @Test
@@ -130,7 +129,7 @@ public class PostServiceTest {
         timedPost.setId(postId);
         when(postRepository.findById(postId)).thenReturn(Optional.of(post));
         postService.deletePost(postId);
-        assertTrue(post.getDeleted());
+        assertTrue(post.getIsDeleted());
     }
 
     @Test
@@ -157,7 +156,7 @@ public class PostServiceTest {
         setAuth();
         Long postId = 1L;
         post.setId(postId);
-        post.setDeleted(true);
+        post.setIsDeleted(true);
         post.setCreatedAt(LocalDateTime.now());
         post.setComments(commentList);
         category.setCategoryName("Wine");
@@ -166,8 +165,8 @@ public class PostServiceTest {
         when(postRepository.findById(postId)).thenReturn(Optional.of(post));
         post.setCategory(category);
         PostDetails details = postService.restorePost(postId);
-        assertFalse(details.getDeleted());
-        assertFalse(post.getDeleted());
+        assertFalse(details.getIsDeleted());
+        assertFalse(post.getIsDeleted());
     }
 
     @Test
@@ -175,14 +174,14 @@ public class PostServiceTest {
         setAuth();
         Long postId = 2L;
         timedPost.setId(postId);
-        timedPost.setDeleted(true);
+        timedPost.setIsDeleted(true);
         timedPost.setCreatedAt(LocalDateTime.now());
         timedPost.setPublished(false);
         category.setCategoryName("Wine");
         when(postRepository.findById(postId)).thenReturn(Optional.of(post));
         timedPost.setCategory(category);
         PostDetails details = postService.restorePost(postId);
-        assertFalse(details.getDeleted());
+        assertFalse(details.getIsDeleted());
         assertFalse(timedPost.getPublished());
     }
 
@@ -221,7 +220,7 @@ public class PostServiceTest {
         when(categoryService.getCategoryById(postFormDataCreate.getCategoryId())).thenReturn(category);
         PostDetails postDetails = postService.editPost(post.getId(), postFormDataUpdate);
         assertEquals("real life is life on the water with new powerboat", postDetails.getTitle());
-        assertTrue(postDetails.getPublished());
+        assertTrue(postDetails.getIsPublished());
     }
 
     @Test
@@ -236,7 +235,7 @@ public class PostServiceTest {
         when(categoryService.getCategoryById(postFormDataCreate.getCategoryId())).thenReturn(category);
         PostDetails postDetails = postService.editPost(post.getId(), postFormDataUpdate);
         assertEquals("real life is life on the water with new powerboat", postDetails.getTitle());
-        assertFalse(postDetails.getPublished());
+        assertFalse(postDetails.getIsPublished());
 
     }
 
@@ -266,7 +265,7 @@ public class PostServiceTest {
         when(categoryService.getCategoryById(postFormDataCreate.getCategoryId())).thenReturn(category);
         PostDetails postDetails = postService.editPost(post.getId(), postFormDataUpdate);
         assertEquals("real life is life on the water with new powerboat", postDetails.getTitle());
-        assertFalse(postDetails.getPublished());
+        assertFalse(postDetails.getIsPublished());
     }
 
     @Test
@@ -394,7 +393,7 @@ public class PostServiceTest {
     @Test
     void test_getPostListByCategoryEmpty() {
         when(postRepository.findByCategoryByOrderByCreatedAtDesc(category.getCategoryName())).thenReturn(List.of());
-        assertThat(postService.getPostListByCategory(category.getCategoryName()).isEmpty());
+        assertThat(postService.getPostListByCategory(category.getCategoryName())).isEmpty();
     }
 
     @Test
@@ -416,7 +415,7 @@ public class PostServiceTest {
     @Test
     void test_getPostDetailsById() {
         when(postRepository.findById(1L)).thenReturn(Optional.ofNullable(post));
-        when(postRepository.getOne(1l)).thenReturn(post);
+        when(postRepository.getById(1L)).thenReturn(post);
         post.setCreatedAt(LocalDateTime.now());
         post.setTitle("wine");
         org.junit.jupiter.api.Assertions.assertEquals(post.getTitle(), postService.getPostDetailsById(1l).getTitle());

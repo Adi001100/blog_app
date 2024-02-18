@@ -1,9 +1,14 @@
 package blog.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@Setter
+@Getter
 public class LoginFormData {
 
     @NotBlank(message = "Must be not blank!")
@@ -14,22 +19,6 @@ public class LoginFormData {
     @NotBlank(message = "Must be not blank!")
     @Size(min = 3)
     private String password;
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {
