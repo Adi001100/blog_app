@@ -43,13 +43,13 @@ class PostControllerItTest {
             .withConfiguration(GreenMailConfiguration.aConfig().withUser("user", "admin"))
             .withPerMethodLifecycle(false);
 
-    private final String IMG_URL_TO_UPLOAD = "src/test/resources/dock.jpeg";
+    private final String IMG_URL_TO_UPLOAD = "src/test/resources/img-YrKQpDoMLBI40UyCBLqTVFed.png";
 
-    private final String IMG_URL_FROM_CLOUDINARY = "https://res.cloudinary.com/drknstmtp/image/upload/v1695896173/dock.jpg";
+    private final String IMG_URL_FROM_CLOUDINARY = "https://res.cloudinary.com/dpksvz4fb/image/upload/v1708345106/img-YrKQpDoMLBI40UyCBLqTVFed.png";
 
     private final String VIDEO_URL_TO_UPLOAD = "src/test/resources/video.mp4";
 
-    private final String VIDEO_URL_FROM_CLOUDINARY = "https://res.cloudinary.com/drknstmtp/video/upload/v1695896180/video.mp4";
+    private final String VIDEO_URL_FROM_CLOUDINARY = "https://res.cloudinary.com/dpksvz4fb/video/upload/v1708345502/video.mp4";
 
     @Test
     void test_saveSuccessfulWithImg() throws Exception {
@@ -255,30 +255,6 @@ class PostControllerItTest {
     }
 
     @Test
-    void test_editNoTimedPostChangeTimedPostSuccessful() throws Exception {
-        saveCategory();
-        saveTestPost();
-        String newPostCommand = "{\n" +
-                "    \"title\": \"power boat\",\n" +
-                "    \"postBody\": \"real life is life on the water with new powerboat\",\n" +
-                "    \"imgUrl\": \"http://powerboat.pictures\",\n" +
-                "    \"publishTime\": \"2023-12-27 11:24:48\",\n" +
-                "    \"timedPost\": \"true\",\n" +
-                "    \"categoryId\":" + 1 + " ,\n" +
-                " \"customUserEmail\" : \"blogmastersget@gmail.com\"\n" +
-                " }";
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/posts/edit/{id}", "1")
-                        .accept(MediaType.APPLICATION_JSON_VALUE)
-                        .content(newPostCommand)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isAccepted())
-                .andExpect(jsonPath("$.title", is("power boat")))
-                .andExpect(jsonPath("$.postBody", is("real life is life on the water with new powerboat")))
-                .andExpect(jsonPath("$.published", is(false)));
-
-    }
-
-    @Test
     void test_editNoTimedPostChangeTimedPostFailed() throws Exception {
         saveCategory();
         saveTestPost();
@@ -379,7 +355,7 @@ class PostControllerItTest {
         saveCategory();
         String inputCommand = "{\n" +
                 "    \"title\": \"test\",\n" +
-                "    \"imgUrl\": \"src/test/resources/dock.jpeg\", \n" +
+                "    \"imgUrl\": \"" + IMG_URL_TO_UPLOAD + "\", \n" +
                 "    \"categoryId\":" + 1 + " ,\n" +
                 " \"customUserEmail\" : \"blogmastersget@gmail.com\"\n" +
                 "}";

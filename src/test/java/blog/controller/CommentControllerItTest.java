@@ -82,7 +82,7 @@ class CommentControllerItTest {
         String inputCommand = "{\n" +
                 "    \"postId\":" + 1 + ",\n" +
                 "    \"author\": \"me\",\n" +
-                "    \"imgUrl\": \"src/test/resources/dock.jpeg\",\n" +
+                "    \"imgUrl\": \"src/test/resources/img-YrKQpDoMLBI40UyCBLqTVFed.png\",\n" +
                 "    \"commentBody\": \"test\"\n" +
                 "}";
 

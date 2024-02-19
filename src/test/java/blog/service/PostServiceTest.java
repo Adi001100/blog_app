@@ -77,7 +77,7 @@ class PostServiceTest {
 
     private Category category;
 
-    private final String IMG_URL_TO_UPLOAD = "src/test/resources/dock.jpeg";
+    private final String IMG_URL_TO_UPLOAD = "src/test/resources/src/test/resources/img-YrKQpDoMLBI40UyCBLqTVFed.png";
 
     private final String IMG_URL_FROM_CLOUDINARY = "https://res.cloudinary.com/drknstmtp/image/upload/v1695896173/dock.jpg";
 
